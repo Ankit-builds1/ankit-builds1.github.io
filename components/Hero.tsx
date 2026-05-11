@@ -130,9 +130,9 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="hidden lg:flex flex-col items-center gap-8"
+            className="order-first flex flex-col items-center gap-6 lg:order-none lg:gap-8"
           >
-            <div className="relative h-64 w-64 xl:h-72 xl:w-72">
+            <div className="relative h-48 w-48 sm:h-56 sm:w-56 lg:h-64 lg:w-64 xl:h-72 xl:w-72">
               {/* Outer halo glow */}
               <div className="absolute -inset-8 rounded-full bg-gradient-to-br from-violet via-fuchsia to-cyan opacity-30 blur-3xl animate-pulse" />
 
