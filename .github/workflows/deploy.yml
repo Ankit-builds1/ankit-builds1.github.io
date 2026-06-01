@@ -24,10 +24,7 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - name: Build
-        run: npm run build
-        env:
-          NEXT_PUBLIC_NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+      - run: npm run build
       - run: touch out/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:
