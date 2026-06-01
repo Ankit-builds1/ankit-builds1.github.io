@@ -28,12 +28,29 @@ export default function ThemeToggle() {
     <button
       onClick={toggle}
       aria-label="Toggle theme"
-      className="grid h-9 w-9 place-items-center rounded-full border border-border bg-bg-card text-fg-muted transition-all hover:border-border-strong hover:text-fg hover:scale-105"
+      className="grid h-9 w-9 place-items-center rounded-full transition-all duration-200"
+      style={{
+        border: "1px solid rgba(255,255,255,0.08)",
+        background: "rgba(255,255,255,0.03)",
+        color: "#7885a0",
+      }}
+      onMouseEnter={(e) => {
+        const el = e.currentTarget as HTMLElement;
+        el.style.borderColor = "rgba(0,255,159,0.3)";
+        el.style.color = "#00ff9f";
+        el.style.boxShadow = "0 0 12px rgba(0,255,159,0.2)";
+      }}
+      onMouseLeave={(e) => {
+        const el = e.currentTarget as HTMLElement;
+        el.style.borderColor = "rgba(255,255,255,0.08)";
+        el.style.color = "#7885a0";
+        el.style.boxShadow = "none";
+      }}
     >
       {mounted ? (
-        isLight ? <Sun size={16} /> : <Moon size={16} />
+        isLight ? <Sun size={15} /> : <Moon size={15} />
       ) : (
-        <Moon size={16} />
+        <Moon size={15} />
       )}
     </button>
   );

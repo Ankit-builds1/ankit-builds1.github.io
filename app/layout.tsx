@@ -1,19 +1,28 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Exo_2, DM_Sans, JetBrains_Mono } from "next/font/google";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import AnkitGPT from "@/components/AnkitGPT";
 import CustomCursor from "@/components/CustomCursor";
 import ScrollProgress from "@/components/ScrollProgress";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const exo2 = Exo_2({
+  variable: "--font-exo2",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  display: "swap",
+});
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains",
   subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -33,8 +42,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Ankit Dash" }],
   openGraph: {
     title: "Ankit Dash · ML / NLP / GenAI Engineer",
-    description:
-      "Multimodal AI across speech, vision, and biomedical signals.",
+    description: "Multimodal AI across speech, vision, and biomedical signals.",
     type: "website",
   },
 };
@@ -52,7 +60,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
+      className={`${exo2.variable} ${dmSans.variable} ${jetbrainsMono.variable} antialiased`}
       suppressHydrationWarning
     >
       <head>
@@ -62,6 +70,7 @@ export default function RootLayout({
         <ScrollProgress />
         <AnimatedBackground />
         {children}
+        <AnkitGPT />
         <CustomCursor />
       </body>
     </html>
