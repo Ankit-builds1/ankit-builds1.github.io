@@ -1,14 +1,10 @@
 "use client";
 
-import { ANKIT_SYSTEM } from "@/lib/ankit-system";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUp, Bot, RotateCcw, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 type Message = { role: "user" | "assistant"; content: string };
-
-const MODEL = "meta/llama-3.3-70b-instruct";
-const NVIDIA_BASE = "https://integrate.api.nvidia.com/v1";
 
 const SUGGESTIONS = [
   "Why should I hire Ankit?",
@@ -60,28 +56,10 @@ export default function AnkitGPT() {
     const history = next.filter((m) => m !== GREETING);
 
     try {
-      const apiKey = process.env.NEXT_PUBLIC_NVIDIA_API_KEY;
-      if (!apiKey) {
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", content: "API key not configured. Please add `NEXT_PUBLIC_NVIDIA_API_KEY` to your environment." },
-        ]);
-        return;
-      }
-
-      const res = await fetch(`${NVIDIA_BASE}/chat/completions`, {
+      const res = await fetch("/api/chat", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-          model: MODEL,
-          messages: [{ role: "system", content: ANKIT_SYSTEM }, ...history],
-          stream: true,
-          max_tokens: 600,
-          temperature: 0.7,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: history }),
       });
 
       if (!res.ok || !res.body) {
@@ -94,7 +72,6 @@ export default function AnkitGPT() {
 
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
-      let buffer = "";
       let reply = "";
 
       setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
@@ -102,36 +79,17 @@ export default function AnkitGPT() {
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-
-        buffer += decoder.decode(value, { stream: true });
-        const lines = buffer.split("\n");
-        buffer = lines.pop() ?? "";
-
-        for (const line of lines) {
-          const trimmed = line.trim();
-          if (!trimmed || trimmed === "data: [DONE]") continue;
-          if (trimmed.startsWith("data: ")) {
-            try {
-              const json = JSON.parse(trimmed.slice(6));
-              const chunk = json.choices?.[0]?.delta?.content ?? "";
-              if (chunk) {
-                reply += chunk;
-                setMessages((prev) => {
-                  const updated = [...prev];
-                  updated[updated.length - 1] = { role: "assistant", content: reply };
-                  return updated;
-                });
-              }
-            } catch {
-              // skip malformed SSE lines
-            }
-          }
-        }
+        reply += decoder.decode(value, { stream: true });
+        setMessages((prev) => {
+          const updated = [...prev];
+          updated[updated.length - 1] = { role: "assistant", content: reply };
+          return updated;
+        });
       }
     } catch {
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: "Connection error — check your network or API key." },
+        { role: "assistant", content: "Connection error — please try again." },
       ]);
     } finally {
       setLoading(false);
