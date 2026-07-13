@@ -1,9 +1,7 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { ArrowUpRight, Mail } from "lucide-react";
 import { profile } from "@/lib/data";
 import { GitHubIcon, LinkedInIcon } from "./BrandIcons";
+import SectionHeading from "./SectionHeading";
 
 const socials = [
   {
@@ -12,137 +10,67 @@ const socials = [
     href: `https://mail.google.com/mail/?view=cm&fs=1&to=${profile.email}&su=${encodeURIComponent(
       "Hi Ankit — let's talk"
     )}`,
-    sub: profile.email,
-    color: "#00ff9f",
+    value: profile.email,
   },
   {
     label: "GitHub",
     icon: GitHubIcon,
     href: profile.github,
-    sub: "@Ankit-builds1",
-    color: "#ff1a6b",
+    value: "@Ankit-builds1",
   },
   {
     label: "LinkedIn",
     icon: LinkedInIcon,
     href: profile.linkedin,
-    sub: "ankitdash-edu",
-    color: "#00d0ff",
+    value: "ankitdash-edu",
   },
 ];
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative px-6 py-28 overflow-hidden">
-      {/* Watermark */}
-      <div
-        className="pointer-events-none absolute -top-8 -left-6 font-display font-black leading-none select-none"
-        style={{ fontSize: "clamp(4.5rem,18vw,16rem)", color: "rgba(0,255,159,0.022)" }}
-        aria-hidden
-      >
-        06
-      </div>
+    <section id="contact" className="border-b border-border">
+      <div className="section-wrap">
+        <SectionHeading number="06" title="Get in touch" />
 
-      <div className="mx-auto max-w-6xl relative">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-10 flex items-center gap-4"
-        >
-          <span className="font-mono text-sm" style={{ color: "#414d63" }}>06 —</span>
-          <h2 className="font-display text-3xl sm:text-4xl font-black tracking-tight">
-            Get in touch
-          </h2>
-          <div
-            className="flex-1 h-px ml-2"
-            style={{ background: "linear-gradient(to right, rgba(0,255,159,0.35), transparent)" }}
-          />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="relative overflow-hidden rounded-3xl p-8 sm:p-12 backdrop-blur-sm"
-          style={{
-            border: "1px solid rgba(0,255,159,0.1)",
-            background: "rgba(0,255,159,0.025)",
-          }}
-        >
-          {/* Background glow */}
-          <div
-            className="pointer-events-none absolute -top-40 -right-40 h-96 w-96 rounded-full blur-3xl opacity-20"
-            style={{ background: "radial-gradient(circle, #00ff9f, transparent 65%)" }}
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute -bottom-40 -left-40 h-96 w-96 rounded-full blur-3xl opacity-12"
-            style={{ background: "radial-gradient(circle, #ff1a6b, transparent 65%)" }}
-            aria-hidden
-          />
-
-          <p className="relative z-10 font-display text-2xl sm:text-3xl md:text-4xl font-black leading-tight max-w-2xl">
-            Got a{" "}
-            <span className="gradient-text">hard ML problem</span>, an
+        <div className="mt-14 grid gap-14 lg:grid-cols-[minmax(0,7fr)_minmax(18rem,5fr)] lg:items-end">
+          <p className="max-w-4xl font-display text-[clamp(2.2rem,5.8vw,5.4rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-fg">
+            Got a <span className="text-accent">hard ML problem</span>, an
             interesting role, or just want to talk agentic systems and
             biomedical signals?{" "}
-            <span style={{ color: "#7885a0" }}>My inbox is wide open.</span>
+            <span className="text-fg-muted">My inbox is wide open.</span>
           </p>
 
-          <div className="relative z-10 mt-10 grid gap-3 sm:grid-cols-3">
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target={s.href.startsWith("http") ? "_blank" : undefined}
-                rel="noopener noreferrer"
-                className="group flex items-center justify-between rounded-xl px-4 py-3.5 transition-all duration-200"
-                style={{
-                  border: "1px solid rgba(255,255,255,0.07)",
-                  background: "rgba(255,255,255,0.025)",
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.borderColor = `${s.color}35`;
-                  el.style.background = `${s.color}06`;
-                  el.style.boxShadow = `0 0 24px ${s.color}20`;
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.borderColor = "rgba(255,255,255,0.07)";
-                  el.style.background = "rgba(255,255,255,0.025)";
-                  el.style.boxShadow = "none";
-                }}
-              >
-                <div className="flex items-center gap-3">
-                  <span
-                    className="grid h-9 w-9 place-items-center rounded-lg transition-all duration-200"
-                    style={{
-                      border: "1px solid rgba(255,255,255,0.08)",
-                      background: "rgba(255,255,255,0.04)",
-                      color: "#7885a0",
-                    }}
-                  >
-                    <s.icon size={16} />
+          <div className="border-t border-border-strong">
+            {socials.map((social) => {
+              const Icon = social.icon;
+
+              return (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group grid grid-cols-[1.5rem_minmax(0,1fr)_1rem] items-center gap-3 border-b border-border py-4 no-underline transition-colors hover:text-accent"
+                >
+                  <Icon size={16} aria-hidden />
+                  <span className="min-w-0">
+                    <span className="block font-mono text-[10px] uppercase tracking-[0.12em] text-fg-subtle">
+                      {social.label}
+                    </span>
+                    <span className="mt-1 block break-all text-sm font-semibold sm:break-normal">
+                      {social.value}
+                    </span>
                   </span>
-                  <div className="min-w-0">
-                    <p className="font-mono text-[10px] uppercase tracking-widest" style={{ color: "#414d63" }}>
-                      {s.label}
-                    </p>
-                    <p className="truncate text-sm font-semibold text-fg">{s.sub}</p>
-                  </div>
-                </div>
-                <ArrowUpRight
-                  size={15}
-                  className="shrink-0 text-fg-subtle transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                />
-              </a>
-            ))}
+                  <ArrowUpRight
+                    size={15}
+                    className="text-fg-subtle transition-colors group-hover:text-accent"
+                    aria-hidden
+                  />
+                </a>
+              );
+            })}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
