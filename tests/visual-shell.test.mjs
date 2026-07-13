@@ -1,11 +1,15 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const read = (path) => readFileSync(resolve(root, path), "utf8");
+const read = (path, options = {}) => {
+  const absolute = resolve(root, path);
+  if (options.flag === "optional" && !existsSync(absolute)) return undefined;
+  return readFileSync(absolute, "utf8");
+};
 
 test("uses the approved experience timeline", () => {
   const data = read("lib/data.ts");
@@ -72,4 +76,24 @@ test("restores education reveal motion", () => {
   assert.match(source, /^"use client";/);
   assert.match(source, /whileInView/);
   assert.match(source, /viewport=\{\{ once: true/);
+});
+
+test("restores hero motion without restoring quotes", () => {
+  const hero = read("components/Hero.tsx");
+  assert.match(hero, /^"use client";/);
+  assert.match(hero, /AnimatePresence/);
+  assert.match(hero, /useReducedMotion/);
+  assert.match(hero, /2400/);
+  assert.match(hero, /profile-photo-orbit/);
+  assert.doesNotMatch(hero, /quotes|quoteIdx|blockquote|Bhagavad|Gita/);
+});
+
+test("uses the approved metric-free About content", () => {
+  const about = read("components/About.tsx");
+  assert.match(about, /^"use client";/);
+  assert.match(about, /I'm a final-year B\.Tech CSE \(DAML\) student/);
+  assert.match(about, /Agentic systems/);
+  assert.match(about, /AI security/);
+  assert.doesNotMatch(about, /const stats|<dl|87%|99\.9%/);
+  assert.equal(read("lib/quotes.ts", { flag: "optional" }), undefined);
 });
