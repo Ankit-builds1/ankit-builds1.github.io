@@ -53,31 +53,22 @@ export const projects: Project[] = [
     href: "https://github.com/ankit848-ai/hierarchical-agentic-malware-classification",
   },
   {
-    title: "SpeakSense — Hybrid Speech Intelligence",
-    emoji: "🎙️",
+    title: "CyberWatch AI",
+    emoji: "CW",
     blurb:
-      "Multi-modal speech AI combining HuBERT-Large, DistilBERT & Mistral 7B for real-time emotion detection, intent classification, and empathetic response generation.",
+      "Local-first AI cybersecurity suite for detecting network intrusions, phishing URLs, malware families, harmful text, and zero-day anomalies without sending prediction data to the cloud.",
     details:
-      "Fine-tuning HuBERT-Large on RAVDESS (90.09% acc, cross-evaluated on CREMA-D) and DistilBERT on Banking77 (85.3% F1), with a confidence-aware hybrid risk-scoring layer. Ablation shows ~279% BLEU improvement from emotion-conditioned prompting. Deploying on HuggingFace Spaces.",
-    tags: ["HuBERT", "Whisper", "DistilBERT", "Mistral 7B", "Gradio", "NLP"],
-    status: "ongoing",
+      "Combines XGBoost, LSTM, RF/XGBoost, 1D-CNN, BERT, Isolation Forest, and Autoencoder models with a CLI, Streamlit dashboard, FastAPI endpoints, and optional live packet monitoring through Scapy/Npcap.",
+    tags: ["Python", "XGBoost", "PyTorch", "Transformers", "FastAPI", "Streamlit", "Cybersecurity"],
   },
   {
-    title: "CMFD — Copy-Move Forgery Detection",
-    emoji: "🔍",
+    title: "ShadowGuard AI",
+    emoji: "SG",
     blurb:
-      "Pixel-level image forensics using EfficientNetB4 + 3-layer ViT + Attention U-Net — targeting Dice 0.891 on CoMoFoD with Grad-CAM explainability.",
+      "Local-first AI safety workspace that inspects prompts and public GitHub repositories for secrets, PII, and prompt injection, then returns policy-guided allow, warn, or block decisions.",
     details:
-      "Hybrid segmentation architecture: EfficientNetB4 backbone, a 3-layer Vision Transformer for long-range dependencies, and an Attention U-Net decoder trained with BCE + Dice + Focal loss. Cross-evaluating on CASIA v2 and DEFACTO; Grad-CAM heatmaps for forensic explainability. Deploying on HuggingFace Spaces.",
-    tags: [
-      "TensorFlow",
-      "EfficientNetB4",
-      "ViT",
-      "Attention U-Net",
-      "Grad-CAM",
-      "OpenCV",
-    ],
-    status: "ongoing",
+      "Built with a Next.js frontend, FastAPI backend, SQLite persistence, and Chrome MV3 extension, with safe rewriting, repository scanning, privacy-risk tracking, and PDF audit reports.",
+    tags: ["Next.js", "TypeScript", "FastAPI", "SQLite", "Chrome MV3", "Scikit-learn", "Cybersecurity"],
   },
 ];
 
@@ -85,24 +76,31 @@ export type Experience = {
   role: string;
   org: string;
   period: string;
-  current?: boolean;
+  status?: "current" | "completed";
   description: string;
 };
 
 export const experience: Experience[] = [
   {
+    role: "AI/ML Intern",
+    org: "Labmentix",
+    period: "Jul 2026 – Present",
+    status: "current",
+    description: "Currently working as an AI/ML Intern at Labmentix.",
+  },
+  {
     role: "Agentic AI Engineer Intern",
     org: "ApexDevs",
-    period: "May 2026 – Jun 2026",
-    current: true,
+    period: "Jun 2026 – Jul 2026",
+    status: "completed",
     description:
-      "Working on real-world agentic AI projects and guided tasks in the Agentic AI Engineer domain — submitting daily updates and weekly milestone reports.",
+      "Worked on real-world agentic AI projects and guided tasks in the Agentic AI Engineer domain, with daily updates and weekly milestone reports.",
   },
   {
     role: "Data Science Intern",
     org: "The Developers Arena",
     period: "May 2026 – Aug 2026",
-    current: true,
+    status: "current",
     description:
       "Completing self-paced data science modules with real-world project development, weekly task submissions, and a structured curriculum with automated progress tracking.",
   },
@@ -110,6 +108,7 @@ export const experience: Experience[] = [
     role: "Machine Learning Intern",
     org: "EdiGlobe",
     period: "Jun 2025 – Jul 2025",
+    status: "completed",
     description:
       "Designed end-to-end ML pipelines (preprocessing, feature engineering, model training); built time-series forecasting models evaluated on RMSE and ROC-AUC.",
   },
