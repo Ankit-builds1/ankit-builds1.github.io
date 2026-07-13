@@ -28,3 +28,22 @@ test("uses the approved four projects in order", () => {
   ]);
   assert.doesNotMatch(data, /SpeakSense|CMFD/);
 });
+
+test("uses the refined tech studio motion shell", () => {
+  const layout = read("app/layout.tsx");
+  const styles = read("app/globals.css");
+  const pkg = read("package.json");
+  assert.match(layout, /Space_Grotesk/);
+  assert.match(layout, /MotionProvider/);
+  assert.match(layout, /AnimatedBackground/);
+  assert.match(layout, /CustomCursor/);
+  assert.doesNotMatch(layout, /Newsreader/);
+  assert.match(pkg, /"framer-motion"/);
+  assert.match(styles, /--canvas: #0b1112/i);
+  assert.match(styles, /--mint: #7ef5ca/i);
+  assert.match(styles, /--blue: #7eb2ff/i);
+  assert.match(styles, /@keyframes orbit-one/);
+  assert.match(styles, /@keyframes spin-slow/);
+  assert.match(styles, /@keyframes marquee-left/);
+  assert.match(styles, /prefers-reduced-motion/);
+});
