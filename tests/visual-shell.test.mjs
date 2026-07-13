@@ -113,3 +113,23 @@ test("uses animated bespoke project cards", () => {
   assert.match(visual, /"shadowguard"/);
   assert.doesNotMatch(visual, /"speech"|"vision"/);
 });
+
+test("restores the skills marquees and contact reveals", () => {
+  const skills = read("components/Skills.tsx");
+  const contact = read("components/Contact.tsx");
+  assert.match(skills, /^"use client";/);
+  assert.match(skills, /skills-marquee-left/);
+  assert.match(skills, /skills-marquee-right/);
+  assert.match(skills, /animationPlayState = "paused"/);
+  assert.match(contact, /^"use client";/);
+  assert.match(contact, /whileInView/);
+});
+
+test("keeps navigation and theme behavior in the selected visual system", () => {
+  const nav = read("components/Navbar.tsx");
+  const theme = read("components/ThemeToggle.tsx");
+  assert.match(nav, /IntersectionObserver/);
+  assert.match(nav, /aria-expanded/);
+  assert.match(nav, /bg-bg\/90|backdrop-blur/);
+  assert.match(theme, /localStorage\.setItem\("theme"/);
+});
