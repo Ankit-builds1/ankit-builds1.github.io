@@ -55,3 +55,21 @@ test("reacts to custom cursor capability changes after hydration", () => {
   assert.match(cursor, /finePointer\.removeEventListener\("change", syncCursor\)/);
   assert.match(cursor, /reducedMotion\.removeEventListener\("change", syncCursor\)/);
 });
+
+test("renders explicit experience statuses with current-only motion", () => {
+  const source = read("components/Experience.tsx");
+  assert.match(source, /^"use client";/);
+  assert.match(source, /item\.status === "current"/);
+  assert.match(source, /item\.status === "completed"/);
+  assert.match(source, /Current/);
+  assert.match(source, /Completed/);
+  assert.match(source, /whileInView/);
+  assert.doesNotMatch(source, /item\.current/);
+});
+
+test("restores education reveal motion", () => {
+  const source = read("components/Education.tsx");
+  assert.match(source, /^"use client";/);
+  assert.match(source, /whileInView/);
+  assert.match(source, /viewport=\{\{ once: true/);
+});
