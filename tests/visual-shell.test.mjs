@@ -97,3 +97,15 @@ test("uses the approved metric-free About content", () => {
   assert.doesNotMatch(about, /const stats|<dl|87%|99\.9%/);
   assert.equal(read("lib/quotes.ts", { flag: "optional" }), undefined);
 });
+
+test("uses animated bespoke project cards", () => {
+  const projects = read("components/Projects.tsx");
+  const visual = read("components/ProjectVisual.tsx");
+  assert.match(projects, /^"use client";/);
+  assert.match(projects, /onMouseMove/);
+  assert.match(projects, /className="spotlight/);
+  assert.match(projects, /whileInView/);
+  assert.match(visual, /"cyberwatch"/);
+  assert.match(visual, /"shadowguard"/);
+  assert.doesNotMatch(visual, /"speech"|"vision"/);
+});

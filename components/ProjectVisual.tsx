@@ -1,12 +1,11 @@
-export type ProjectVisualKind = "signal" | "decision" | "speech" | "vision";
+export type ProjectVisualKind = "signal" | "decision" | "cyberwatch" | "shadowguard";
 
 type ProjectVisualProps = {
   kind: ProjectVisualKind;
 };
 
 const signalHeights = [24, 42, 30, 72, 38, 58, 88, 45, 66, 32, 52, 76];
-const speechHeights = [30, 54, 82, 46, 68, 34, 74, 92, 52, 38, 64, 44];
-const activeVisionCells = new Set([2, 3, 7, 8, 9, 13, 14, 18]);
+const cyberwatchChannels = ["NET", "URL", "FILE", "TEXT"];
 
 function SignalVisual() {
   return (
@@ -45,50 +44,51 @@ function DecisionVisual() {
   );
 }
 
-function SpeechVisual() {
+function CyberwatchVisual() {
   return (
     <>
-      <div className="pv-bars pv-speech-bars">
-        {speechHeights.map((height, index) => (
-          <span key={`${height}-${index}`} style={{ height: `${height}%` }} />
+      <div className="pv-cyberwatch-monitor">
+        {cyberwatchChannels.map((channel) => (
+          <div className="pv-cyberwatch-channel" key={channel}>
+            <span>{channel}</span>
+            <div className="pv-cyberwatch-track" aria-hidden="true">
+              <i />
+            </div>
+          </div>
         ))}
       </div>
-      <div className="pv-label-row">
-        <span>Emotion</span>
-        <span>Intent</span>
-        <span>Response</span>
+      <div className="pv-cyberwatch-footer">
+        <span>
+          <i aria-hidden="true" />
+          Local monitor
+        </span>
+        <span>4 threat channels</span>
       </div>
     </>
   );
 }
 
-function VisionVisual() {
+function ShadowguardVisual() {
   return (
-    <>
-      <div className="pv-vision-grid">
-        {Array.from({ length: 25 }, (_, index) => (
-          <span
-            key={index}
-            className={activeVisionCells.has(index) ? "is-active" : undefined}
-          />
-        ))}
+    <div className="pv-shadowguard-flow">
+      <span className="pv-shadowguard-step">INPUT</span>
+      <i className="pv-shadowguard-arrow" aria-hidden="true" />
+      <span className="pv-shadowguard-step pv-shadowguard-inspect">INSPECT</span>
+      <i className="pv-shadowguard-arrow" aria-hidden="true" />
+      <div className="pv-shadowguard-outcomes">
+        <span className="pv-shadowguard-outcome pv-shadowguard-allow">ALLOW</span>
+        <span className="pv-shadowguard-outcome pv-shadowguard-warn">WARN</span>
+        <span className="pv-shadowguard-outcome pv-shadowguard-block">BLOCK</span>
       </div>
-      <div className="pv-route">
-        <span>Backbone</span>
-        <i aria-hidden />
-        <span>ViT</span>
-        <i aria-hidden />
-        <span>Mask</span>
-      </div>
-    </>
+    </div>
   );
 }
 
 const visuals = {
   signal: SignalVisual,
   decision: DecisionVisual,
-  speech: SpeechVisual,
-  vision: VisionVisual,
+  cyberwatch: CyberwatchVisual,
+  shadowguard: ShadowguardVisual,
 };
 
 export default function ProjectVisual({ kind }: ProjectVisualProps) {
