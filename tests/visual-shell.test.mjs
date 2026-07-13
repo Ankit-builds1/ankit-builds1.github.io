@@ -13,8 +13,10 @@ test("replaces the generic neon shell", () => {
 });
 
 test("keeps the field-notes palette restrained and readable", () => {
-  assert.doesNotMatch(read("app/globals.css"), /--color-annotation|--annotation:/);
-  assert.match(read("app/globals.css"), /--ink-subtle: #646760/);
+  const styles = read("app/globals.css");
+  assert.doesNotMatch(styles, /--color-annotation|--annotation:/);
+  assert.match(styles, /--ink-subtle: #646760/);
+  assert.match(styles, /\n:root\.light \{\n  color-scheme: light;/);
   assert.match(read("components/ThemeToggle.tsx"), /theme-label-dark/);
   assert.match(read("components/ThemeToggle.tsx"), /theme-label-light/);
 });

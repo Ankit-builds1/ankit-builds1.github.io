@@ -34,7 +34,7 @@
   --selection: rgba(193, 120, 91, 0.32);
 }
 
-:where(.light) {
+:root.light {
   color-scheme: light;
   --canvas: #f2ede2;
   --paper: #f7f2e8;
