@@ -12,6 +12,13 @@ test("replaces the generic neon shell", () => {
   assert.doesNotMatch(read("app/globals.css"), /animate-spin-slow|marquee|neon-glow|gradient-text/);
 });
 
+test("keeps the field-notes palette restrained and readable", () => {
+  assert.doesNotMatch(read("app/globals.css"), /--color-annotation|--annotation:/);
+  assert.match(read("app/globals.css"), /--ink-subtle: #646760/);
+  assert.match(read("components/ThemeToggle.tsx"), /theme-label-dark/);
+  assert.match(read("components/ThemeToggle.tsx"), /theme-label-light/);
+});
+
 test("uses the field-notes content structure", () => {
   assert.match(read("components/Hero.tsx"), /profile-photo-card/);
   assert.match(read("components/Projects.tsx"), /ProjectVisual/);

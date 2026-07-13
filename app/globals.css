@@ -13,7 +13,6 @@
   --color-border-strong: var(--rule-strong);
   --color-accent: var(--clay);
   --color-signal: var(--signal);
-  --color-annotation: var(--annotation);
   --font-sans: var(--font-dm-sans), system-ui, sans-serif;
   --font-display: var(--font-newsreader), Georgia, serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
@@ -31,7 +30,6 @@
   --rule-strong: #515a50;
   --clay: #c1785b;
   --signal: #75c4a6;
-  --annotation: #d0a45a;
   --grid-line: rgba(240, 234, 223, 0.035);
   --selection: rgba(193, 120, 91, 0.32);
 }
@@ -43,12 +41,11 @@
   --paper-raised: #fbf8f1;
   --ink: #171a19;
   --ink-muted: #5f625d;
-  --ink-subtle: #797b75;
+  --ink-subtle: #646760;
   --rule: #c9c0b2;
   --rule-strong: #9e9485;
   --clay: #a44f32;
   --signal: #1d6b52;
-  --annotation: #8d641f;
   --grid-line: rgba(23, 26, 25, 0.045);
   --selection: rgba(164, 79, 50, 0.2);
 }
@@ -255,11 +252,17 @@ section[id] {
   display: none;
 }
 
-.light .theme-icon-dark {
+.theme-label-light {
   display: none;
 }
 
-.light .theme-icon-light {
+.light .theme-icon-dark,
+.light .theme-label-dark {
+  display: none;
+}
+
+.light .theme-icon-light,
+.light .theme-label-light {
   display: block;
 }
 

@@ -12,12 +12,13 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      aria-label="Switch color theme"
       title="Switch color theme"
       className="theme-toggle"
     >
       <Moon className="theme-icon theme-icon-dark" size={16} aria-hidden />
       <Sun className="theme-icon theme-icon-light" size={16} aria-hidden />
+      <span className="theme-label-dark sr-only">Switch to light theme</span>
+      <span className="theme-label-light sr-only">Switch to dark theme</span>
     </button>
   );
 }
