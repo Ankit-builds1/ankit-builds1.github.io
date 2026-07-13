@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
-import { Exo_2, DM_Sans, JetBrains_Mono } from "next/font/google";
-import AnimatedBackground from "@/components/AnimatedBackground";
-import CustomCursor from "@/components/CustomCursor";
+import { DM_Sans, JetBrains_Mono, Newsreader } from "next/font/google";
 import ScrollProgress from "@/components/ScrollProgress";
 import "./globals.css";
 
-const exo2 = Exo_2({
-  variable: "--font-exo2",
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
 
@@ -59,17 +56,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${exo2.variable} ${dmSans.variable} ${jetbrainsMono.variable} antialiased`}
+      className={`${newsreader.variable} ${dmSans.variable} ${jetbrainsMono.variable} antialiased`}
       suppressHydrationWarning
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className="noise min-h-screen overflow-x-hidden">
+      <body className="site-shell min-h-screen overflow-x-hidden">
         <ScrollProgress />
-        <AnimatedBackground />
         {children}
-        <CustomCursor />
       </body>
     </html>
   );
