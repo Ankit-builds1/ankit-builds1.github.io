@@ -47,3 +47,11 @@ test("uses the refined tech studio motion shell", () => {
   assert.match(styles, /@keyframes marquee-left/);
   assert.match(styles, /prefers-reduced-motion/);
 });
+
+test("reacts to custom cursor capability changes after hydration", () => {
+  const cursor = read("components/CustomCursor.tsx");
+  assert.match(cursor, /finePointer\.addEventListener\("change", syncCursor\)/);
+  assert.match(cursor, /reducedMotion\.addEventListener\("change", syncCursor\)/);
+  assert.match(cursor, /finePointer\.removeEventListener\("change", syncCursor\)/);
+  assert.match(cursor, /reducedMotion\.removeEventListener\("change", syncCursor\)/);
+});

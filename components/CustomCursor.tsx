@@ -11,15 +11,14 @@ export default function CustomCursor() {
   useEffect(() => {
     const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (!finePointer.matches || reducedMotion.matches) return;
-
-    document.documentElement.classList.add("has-custom-cursor");
-
-    let rafId: number;
+    let cursorActive = false;
+    let rafId: number | null = null;
 
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
     const tick = () => {
+      if (!cursorActive) return;
+
       ring.current.x = lerp(ring.current.x, mouse.current.x, 0.16);
       ring.current.y = lerp(ring.current.y, mouse.current.y, 0.16);
 
@@ -32,8 +31,6 @@ export default function CustomCursor() {
 
       rafId = requestAnimationFrame(tick);
     };
-
-    rafId = requestAnimationFrame(tick);
 
     const onMove = (event: MouseEvent) => {
       mouse.current.x = event.clientX;
@@ -74,16 +71,50 @@ export default function CustomCursor() {
       if (ringRef.current) ringRef.current.style.opacity = "0.6";
     };
 
-    document.addEventListener("mousemove", onMove, { passive: true });
-    document.addEventListener("mouseleave", onLeave);
-    document.addEventListener("mouseenter", onEnter);
+    const startCursor = () => {
+      if (cursorActive) return;
 
-    return () => {
-      cancelAnimationFrame(rafId);
+      cursorActive = true;
+      document.documentElement.classList.add("has-custom-cursor");
+      document.addEventListener("mousemove", onMove, { passive: true });
+      document.addEventListener("mouseleave", onLeave);
+      document.addEventListener("mouseenter", onEnter);
+      rafId = requestAnimationFrame(tick);
+    };
+
+    const stopCursor = () => {
+      cursorActive = false;
+
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+
       document.documentElement.classList.remove("has-custom-cursor");
       document.removeEventListener("mousemove", onMove);
       document.removeEventListener("mouseleave", onLeave);
       document.removeEventListener("mouseenter", onEnter);
+
+      if (dotRef.current) dotRef.current.style.opacity = "0";
+      if (ringRef.current) ringRef.current.style.opacity = "0";
+    };
+
+    const syncCursor = () => {
+      if (finePointer.matches && !reducedMotion.matches) {
+        startCursor();
+      } else {
+        stopCursor();
+      }
+    };
+
+    finePointer.addEventListener("change", syncCursor);
+    reducedMotion.addEventListener("change", syncCursor);
+    syncCursor();
+
+    return () => {
+      finePointer.removeEventListener("change", syncCursor);
+      reducedMotion.removeEventListener("change", syncCursor);
+      stopCursor();
     };
   }, []);
 
