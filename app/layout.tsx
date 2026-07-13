@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Exo_2, DM_Sans, JetBrains_Mono } from "next/font/google";
 import AnimatedBackground from "@/components/AnimatedBackground";
-import AnkitGPT from "@/components/AnkitGPT";
 import CustomCursor from "@/components/CustomCursor";
 import ScrollProgress from "@/components/ScrollProgress";
 import "./globals.css";
@@ -70,7 +69,6 @@ export default function RootLayout({
         <ScrollProgress />
         <AnimatedBackground />
         {children}
-        <AnkitGPT />
         <CustomCursor />
       </body>
     </html>
