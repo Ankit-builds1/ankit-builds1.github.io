@@ -105,6 +105,10 @@ test("uses animated bespoke project cards", () => {
   assert.match(projects, /onMouseMove/);
   assert.match(projects, /className="spotlight/);
   assert.match(projects, /whileInView/);
+  assert.match(
+    projects,
+    /project\.tags\.map\([\s\S]*?className="[^"]*text-fg-muted[^"]*"/,
+  );
   assert.match(visual, /"cyberwatch"/);
   assert.match(visual, /"shadowguard"/);
   assert.doesNotMatch(visual, /"speech"|"vision"/);

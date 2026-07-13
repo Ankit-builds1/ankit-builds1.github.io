@@ -77,7 +77,7 @@ export default function Projects() {
                 {project.tags.map((tag) => (
                   <li
                     key={tag}
-                    className="rounded-full border border-border bg-bg/35 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.06em] text-fg-subtle"
+                    className="rounded-full border border-border bg-bg/35 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.06em] text-fg-muted"
                   >
                     {tag}
                   </li>
