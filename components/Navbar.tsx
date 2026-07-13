@@ -49,7 +49,7 @@ export default function Navbar() {
         className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4"
       >
         <a href="#top" className="group flex items-center gap-3 no-underline">
-          <span className="grid h-9 w-9 place-items-center rounded-[2px] border border-border-strong bg-bg-card font-mono text-[11px] font-semibold tracking-[0.08em] text-accent transition-colors group-hover:border-accent">
+          <span className="grid h-9 w-9 place-items-center rounded-[2px] border border-border-strong bg-bg-card text-[11px] font-semibold tracking-[0.08em] text-accent transition-colors group-hover:border-accent">
             {profile.monogram}
           </span>
           <span className="hidden font-display text-lg font-semibold tracking-tight sm:inline">
@@ -67,13 +67,13 @@ export default function Navbar() {
                 <a
                   href={link.href}
                   aria-current={isActive ? "page" : undefined}
-                  className={`flex items-baseline gap-1 border-b py-1 font-mono text-[11px] uppercase tracking-[0.08em] no-underline transition-colors ${
+                  className={`flex items-baseline gap-1 border-b py-1 text-[11px] font-semibold uppercase tracking-[0.08em] no-underline transition-colors ${
                     isActive
                       ? "border-accent text-fg"
                       : "border-transparent text-fg-muted hover:border-border-strong hover:text-fg"
                   }`}
                 >
-                  <span className="text-fg-subtle">
+                  <span className="font-mono font-normal text-fg-subtle">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   {link.label}
@@ -88,7 +88,7 @@ export default function Navbar() {
             href={profile.resume}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden items-center gap-1.5 border-b border-border-strong py-1 font-mono text-[11px] uppercase tracking-[0.08em] no-underline transition-colors hover:border-accent hover:text-accent sm:inline-flex"
+            className="hidden items-center gap-1.5 border-b border-border-strong py-1 text-[11px] font-semibold uppercase tracking-[0.08em] no-underline transition-colors hover:border-accent hover:text-accent sm:inline-flex"
           >
             <FileText size={13} aria-hidden />
             Resume
@@ -118,9 +118,9 @@ export default function Navbar() {
                 <a
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="flex items-baseline gap-1.5 border-b border-border py-3 font-mono text-xs uppercase tracking-[0.08em] no-underline text-fg-muted transition-colors hover:text-accent"
+                  className="flex items-baseline gap-1.5 border-b border-border py-3 text-xs font-semibold uppercase tracking-[0.08em] no-underline text-fg-muted transition-colors hover:text-accent"
                 >
-                  <span className="text-fg-subtle">
+                  <span className="font-mono font-normal text-fg-subtle">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   {link.label}
@@ -133,7 +133,7 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
-                className="flex items-center gap-2 border-b border-border py-3 font-mono text-xs uppercase tracking-[0.08em] no-underline text-fg-muted transition-colors hover:text-accent"
+                className="flex items-center gap-2 border-b border-border py-3 text-xs font-semibold uppercase tracking-[0.08em] no-underline text-fg-muted transition-colors hover:text-accent"
               >
                 <FileText size={13} aria-hidden />
                 Resume

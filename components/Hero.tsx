@@ -65,7 +65,7 @@ export default function Hero() {
           <div className="profile-photo-card">
             <Image
               src="/me.jpg"
-              alt={`${profile.name} in Bhubaneswar`}
+              alt={`Portrait of ${profile.name}`}
               fill
               priority
               sizes="(min-width: 1024px) 25rem, (min-width: 640px) 60vw, 92vw"
@@ -73,7 +73,7 @@ export default function Hero() {
             />
           </div>
           <figcaption className="mt-3 flex items-center justify-between gap-4 border-b border-border pb-3 font-mono text-[11px] uppercase tracking-[0.1em] text-fg-subtle">
-            <span>Portrait / 2026</span>
+            <span>Portrait / {profile.name}</span>
             <span>Bhubaneswar, IN</span>
           </figcaption>
 

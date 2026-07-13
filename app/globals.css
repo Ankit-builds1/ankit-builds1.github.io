@@ -404,7 +404,7 @@ section[id] {
   border-radius: 2px;
   background: var(--paper-raised);
   color: var(--ink);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.75rem;
   text-decoration: none;
   transform: translateY(-160%);

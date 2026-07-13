@@ -41,7 +41,7 @@ export default function Projects() {
                     href={project.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-link justify-self-start py-1 font-mono text-[11px] uppercase tracking-[0.08em] sm:justify-self-end"
+                    className="text-link justify-self-start py-1 text-[11px] font-semibold uppercase tracking-[0.08em] sm:justify-self-end"
                     aria-label={`Open repository for ${project.title}`}
                   >
                     Repository

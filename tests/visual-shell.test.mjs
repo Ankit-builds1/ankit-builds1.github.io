@@ -27,3 +27,28 @@ test("uses the field-notes content structure", () => {
   assert.match(read("components/Skills.tsx"), /skills-grid/);
   assert.doesNotMatch(read("components/Skills.tsx"), /TickerRow/);
 });
+
+test("keeps content semantics and typography intentional", () => {
+  const about = read("components/About.tsx");
+  const hero = read("components/Hero.tsx");
+  const footer = read("components/Footer.tsx");
+  const navbar = read("components/Navbar.tsx");
+  const projects = read("components/Projects.tsx");
+  const styles = read("app/globals.css");
+  const statsLedger = about.match(/<dl[\s\S]*?<\/dl>/)?.[0] ?? "";
+
+  assert.ok(about.indexOf("<dt") < about.indexOf("<dd"));
+  assert.doesNotMatch(statsLedger, /<p className=/);
+  assert.doesNotMatch(statsLedger, /className="contents"/);
+  assert.match(hero, /alt=\{`Portrait of \$\{profile\.name\}`\}/);
+  assert.doesNotMatch(hero, /alt=\{`\$\{profile\.name\} in Bhubaneswar`\}/);
+  assert.match(hero, /Portrait \/ \{profile\.name\}/);
+  assert.doesNotMatch(hero, /Portrait \/ 2026/);
+  assert.match(footer, /Built with Next\.js &amp; Tailwind/);
+  assert.doesNotMatch(navbar, /font-mono text-(?:\[11px\]|xs) uppercase/);
+  assert.doesNotMatch(projects, /className="text-link[^"]*font-mono/);
+  assert.match(
+    styles,
+    /\.skip-link \{[\s\S]*?font-family: var\(--font-sans\);/
+  );
+});

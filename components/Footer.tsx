@@ -10,6 +10,7 @@ export default function Footer() {
           © {year} {profile.name}.
         </p>
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+          <span>Built with Next.js &amp; Tailwind</span>
           <span>{profile.location}</span>
           <a className="transition-colors hover:text-accent" href={`mailto:${profile.email}`}>
             {profile.email}

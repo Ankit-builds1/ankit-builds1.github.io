@@ -15,14 +15,16 @@ export default function About() {
 
         <dl className="mt-12 grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-4">
           {stats.map((stat) => (
-            <div key={stat.label} className="bg-bg p-4 sm:p-5">
-              <dd className="font-display text-[clamp(2.2rem,5vw,3.8rem)] font-semibold leading-none tracking-[-0.04em] text-accent">
+            <div key={stat.label} className="flex flex-col bg-bg p-4 sm:p-5">
+              <dt className="order-2 mt-3 text-sm font-semibold text-fg">
+                {stat.label}
+              </dt>
+              <dd className="order-1 font-display text-[clamp(2.2rem,5vw,3.8rem)] font-semibold leading-none tracking-[-0.04em] text-accent">
                 {stat.value}
               </dd>
-              <dt className="mt-3 text-sm font-semibold text-fg">{stat.label}</dt>
-              <p className="mt-1 font-mono text-[10px] leading-relaxed uppercase tracking-[0.06em] text-fg-subtle">
+              <dd className="order-3 mt-1 font-mono text-[10px] leading-relaxed uppercase tracking-[0.06em] text-fg-subtle">
                 {stat.sub}
-              </p>
+              </dd>
             </div>
           ))}
         </dl>
