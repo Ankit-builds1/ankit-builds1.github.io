@@ -177,3 +177,36 @@ test("closes the final browser QA motion and contrast gaps", () => {
     assert.doesNotMatch(read(component), /text-fg-subtle/);
   }
 });
+
+test("provides user-controlled motion and closes final accessibility review gaps", () => {
+  const provider = read("components/MotionProvider.tsx");
+  const toggle = read("components/MotionToggle.tsx", { flag: "optional" });
+  const nav = read("components/Navbar.tsx");
+  const hero = read("components/Hero.tsx");
+  const styles = read("app/globals.css");
+
+  assert.ok(toggle, "MotionToggle must provide a persistent pause control");
+  assert.match(provider, /data-motion-paused/);
+  assert.match(provider, /useMotionPreference/);
+  assert.match(toggle, /Pause animations/);
+  assert.match(toggle, /Resume animations/);
+  assert.match(nav, /<MotionToggle \/>/);
+  assert.match(hero, /motionPaused/);
+  assert.match(hero, /\bpreload\b/);
+  assert.doesNotMatch(hero, /\bpriority\b/);
+  assert.match(
+    styles,
+    /\[data-motion-paused="true"\][\s\S]*?animation-play-state:\s*paused\s*!important/,
+  );
+  assert.match(
+    styles,
+    /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.project-card:hover[\s\S]*?translate:\s*none/,
+  );
+  assert.match(
+    styles,
+    /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.project-card-link:hover svg[\s\S]*?transform:\s*none/,
+  );
+  assert.match(styles, /--mint-contrast:/);
+  assert.match(styles, /\.status-current[\s\S]*?color:\s*var\(--mint-contrast\)/);
+  assert.match(styles, /\.project-card-link:hover[\s\S]*?color:\s*var\(--mint-contrast\)/);
+});

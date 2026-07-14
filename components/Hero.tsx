@@ -5,20 +5,22 @@ import { ArrowDown, Mail, MapPin } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { profile } from "@/lib/data";
+import { useMotionPreference } from "./MotionProvider";
 
 export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
   const reduceMotion = useReducedMotion();
+  const { motionPaused } = useMotionPreference();
 
   useEffect(() => {
-    if (reduceMotion !== false) return;
+    if (reduceMotion !== false || motionPaused) return;
 
     const timer = window.setInterval(() => {
       setRoleIndex((current) => (current + 1) % profile.roles.length);
     }, 2400);
 
     return () => window.clearInterval(timer);
-  }, [reduceMotion]);
+  }, [motionPaused, reduceMotion]);
 
   return (
     <section
@@ -132,7 +134,7 @@ export default function Hero() {
                 src="/me.jpg"
                 alt={`Portrait of ${profile.name}`}
                 fill
-                priority
+                preload
                 sizes="(min-width: 1024px) 25rem, (min-width: 640px) 60vw, 92vw"
                 className="object-cover object-[center_20%]"
               />

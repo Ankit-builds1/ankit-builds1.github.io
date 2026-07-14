@@ -1,7 +1,7 @@
 # Refined Tech Studio Portfolio Redesign
 
-**Date:** 2026-07-13  
-**Status:** Selected visual direction, awaiting written-spec review  
+**Date:** 2026-07-13
+**Status:** Selected visual direction, awaiting written-spec review
 **Selected option:** A — Refined Tech Studio
 
 ## Objective

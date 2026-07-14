@@ -3,6 +3,7 @@
 import { FileText, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { navLinks, profile } from "@/lib/data";
+import MotionToggle from "./MotionToggle";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
@@ -93,6 +94,7 @@ export default function Navbar() {
             <FileText size={13} aria-hidden />
             Resume
           </a>
+          <MotionToggle />
           <ThemeToggle />
           <button
             type="button"
