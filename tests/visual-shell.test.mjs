@@ -133,3 +133,46 @@ test("keeps navigation and theme behavior in the selected visual system", () => 
   assert.match(nav, /bg-bg\/90|backdrop-blur/);
   assert.match(theme, /localStorage\.setItem\("theme"/);
 });
+
+test("closes the final browser QA motion and contrast gaps", () => {
+  const styles = read("app/globals.css");
+  const experience = read("components/Experience.tsx");
+  const cursor = read("components/CustomCursor.tsx");
+  const about = read("components/About.tsx");
+
+  assert.match(styles, /@keyframes halo-pulse/);
+  assert.match(styles, /@keyframes spin-reverse/);
+  assert.match(
+    styles,
+    /\.portrait-halo\s*\{[\s\S]*?animation:\s*halo-pulse[^;]*;/,
+  );
+  assert.match(
+    styles,
+    /\.portrait-inner-glow\s*\{[\s\S]*?animation:\s*spin-reverse[^;]*;/,
+  );
+  assert.match(
+    styles,
+    /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.portrait-halo,\s*\.portrait-inner-glow\s*\{[\s\S]*?animation:\s*none\s*!important;/,
+  );
+
+  assert.match(experience, /className="[^"]*experience-entry[^"]*"/);
+  assert.match(styles, /\.experience-entry:hover\s*\{/);
+
+  assert.match(cursor, /var\(--mint\)/);
+  assert.doesNotMatch(cursor, /#7ef5ca|rgba\(126,\s*245,\s*202/i);
+
+  assert.match(
+    about,
+    /<span className="eyebrow text-mint">Focus areas<\/span>/,
+  );
+  assert.equal((about.match(/<p(?:\s|>)/g) ?? []).length, 2);
+
+  for (const component of [
+    "components/Hero.tsx",
+    "components/Experience.tsx",
+    "components/Education.tsx",
+    "components/Certifications.tsx",
+  ]) {
+    assert.doesNotMatch(read(component), /text-fg-subtle/);
+  }
+});

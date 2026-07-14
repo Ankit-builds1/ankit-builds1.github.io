@@ -32,7 +32,7 @@ export default function Education() {
               }}
             >
               <div className="md:pt-1">
-                <p className="font-mono text-xs uppercase tracking-[0.08em] text-fg-subtle">
+                <p className="font-mono text-xs uppercase tracking-[0.08em] text-fg-muted">
                   {education.period}
                 </p>
                 {education.grade ? (
@@ -50,7 +50,7 @@ export default function Education() {
                   {education.school}
                   {education.board ? (
                     <>
-                      <span className="text-fg-subtle"> · </span>
+                      <span className="text-fg-muted"> · </span>
                       <span>{education.board}</span>
                     </>
                   ) : null}

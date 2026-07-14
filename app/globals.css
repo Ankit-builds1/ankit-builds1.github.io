@@ -56,6 +56,8 @@
 @keyframes orbit-one { 0%,100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(48px,-30px,0) scale(1.06); } }
 @keyframes orbit-two { 0%,100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(-55px,38px,0) scale(1.1); } }
 @keyframes spin-slow { to { transform: rotate(360deg); } }
+@keyframes halo-pulse { 0%,100% { opacity: 0.42; transform: scale(0.96); } 50% { opacity: 0.72; transform: scale(1.06); } }
+@keyframes spin-reverse { to { transform: rotate(-360deg); } }
 @keyframes marquee-left { to { transform: translateX(-50%); } }
 @keyframes marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 
@@ -197,6 +199,24 @@ section[id] {
   animation: orbit-one 30s ease-in-out -11s infinite reverse;
 }
 
+.portrait-halo {
+  animation: halo-pulse 5.5s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+.portrait-inner-glow {
+  background: conic-gradient(
+    from 210deg,
+    color-mix(in srgb, var(--mint) 18%, transparent) 0 9%,
+    transparent 9% 48%,
+    color-mix(in srgb, var(--blue) 22%, transparent) 48% 62%,
+    transparent 62% 91%,
+    color-mix(in srgb, var(--mint) 14%, transparent) 91% 100%
+  );
+  animation: spin-reverse 38s linear infinite;
+  will-change: transform;
+}
+
 .studio-surface {
   border: 1px solid var(--rule);
   border-radius: 1rem;
@@ -209,6 +229,20 @@ section[id] {
 .studio-surface:hover {
   border-color: var(--rule-strong);
   background: color-mix(in srgb, var(--surface-raised) 96%, transparent);
+}
+
+.experience-entry {
+  transition: border-color 180ms ease, background-color 180ms ease;
+}
+
+.experience-entry:hover {
+  border-color: color-mix(in srgb, var(--mint) 24%, var(--rule));
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--mint) 5%, transparent),
+    color-mix(in srgb, var(--blue) 2%, transparent) 58%,
+    transparent
+  );
 }
 
 .spotlight {
@@ -972,6 +1006,17 @@ section[id] {
   .ambient-orb,
   .skills-marquee-left,
   .skills-marquee-right {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .portrait-halo,
+  .portrait-inner-glow {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .portrait-ring {
     animation: none !important;
     transform: none !important;
   }

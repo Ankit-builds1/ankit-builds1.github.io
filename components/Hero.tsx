@@ -142,7 +142,7 @@ export default function Hero() {
               aria-hidden
             />
           </div>
-          <figcaption className="mt-5 flex items-center justify-between gap-4 border-b border-border pb-3 font-mono text-[11px] uppercase tracking-[0.1em] text-fg-subtle">
+          <figcaption className="mt-5 flex items-center justify-between gap-4 border-b border-border pb-3 font-mono text-[11px] uppercase tracking-[0.1em] text-fg-muted">
             <span>Portrait / {profile.name}</span>
             <span>Bhubaneswar, IN</span>
           </figcaption>
@@ -156,7 +156,7 @@ export default function Hero() {
         className="absolute bottom-5 left-1/2 -translate-x-1/2"
         aria-hidden
       >
-        <div className="flex flex-col items-center gap-1 font-mono text-[10px] uppercase tracking-[0.22em] text-fg-subtle">
+        <div className="flex flex-col items-center gap-1 font-mono text-[10px] uppercase tracking-[0.22em] text-fg-muted">
           Scroll
           <span className="h-8 w-px bg-gradient-to-b from-mint/50 to-transparent" />
         </div>

@@ -14,7 +14,7 @@ export default function Experience() {
           {experience.map((item, index) => (
             <motion.li
               key={`${item.org}-${item.role}`}
-              className="relative grid gap-5 border-b border-border py-8 pl-8 last:border-b-0 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-10 md:pl-12"
+              className="experience-entry relative grid gap-5 border-b border-border py-8 pl-8 last:border-b-0 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-10 md:pl-12"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-60px" }}
@@ -34,7 +34,7 @@ export default function Experience() {
               />
 
               <div>
-                <p className="font-mono text-xs leading-relaxed uppercase tracking-[0.08em] text-fg-subtle">
+                <p className="font-mono text-xs leading-relaxed uppercase tracking-[0.08em] text-fg-muted">
                   {item.period}
                 </p>
                 {item.status === "current" ? (

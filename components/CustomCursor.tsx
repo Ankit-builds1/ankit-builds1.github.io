@@ -126,8 +126,8 @@ export default function CustomCursor() {
         style={{
           width: "26px",
           height: "26px",
-          border: "1px solid rgba(126, 245, 202, 0.68)",
-          boxShadow: "0 0 14px rgba(126, 245, 202, 0.16)",
+          border: "1px solid color-mix(in srgb, var(--mint) 68%, transparent)",
+          boxShadow: "0 0 14px color-mix(in srgb, var(--mint) 16%, transparent)",
           opacity: 0,
           transition: "width 0.18s ease, height 0.18s ease, opacity 0.12s ease",
           willChange: "transform",
@@ -139,8 +139,8 @@ export default function CustomCursor() {
         style={{
           width: "5px",
           height: "5px",
-          background: "#7EF5CA",
-          boxShadow: "0 0 8px rgba(126, 245, 202, 0.65)",
+          background: "var(--mint)",
+          boxShadow: "0 0 8px color-mix(in srgb, var(--mint) 65%, transparent)",
           opacity: 0,
           transition: "width 0.15s ease, height 0.15s ease",
           willChange: "transform",

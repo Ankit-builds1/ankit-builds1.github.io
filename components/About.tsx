@@ -39,7 +39,7 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.12, ease: "easeOut" }}
             className="self-start border-l border-mint pl-6 md:mt-2"
           >
-            <p className="eyebrow text-mint">Focus areas</p>
+            <span className="eyebrow text-mint">Focus areas</span>
             <ul className="mt-5 space-y-3" role="list">
               {focusAreas.map((area) => (
                 <li
