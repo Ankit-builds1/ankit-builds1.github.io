@@ -122,6 +122,7 @@ export default function CustomCursor() {
     <>
       <div
         ref={ringRef}
+        aria-hidden="true"
         className="pointer-events-none fixed left-0 top-0 z-[9999] rounded-full"
         style={{
           width: "26px",
@@ -135,6 +136,7 @@ export default function CustomCursor() {
       />
       <div
         ref={dotRef}
+        aria-hidden="true"
         className="pointer-events-none fixed left-0 top-0 z-[9999] rounded-full"
         style={{
           width: "5px",

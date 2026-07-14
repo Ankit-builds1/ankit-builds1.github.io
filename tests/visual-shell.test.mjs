@@ -160,6 +160,7 @@ test("closes the final browser QA motion and contrast gaps", () => {
 
   assert.match(cursor, /var\(--mint\)/);
   assert.doesNotMatch(cursor, /#7ef5ca|rgba\(126,\s*245,\s*202/i);
+  assert.equal((cursor.match(/aria-hidden="true"/g) ?? []).length, 2);
 
   assert.match(
     about,
