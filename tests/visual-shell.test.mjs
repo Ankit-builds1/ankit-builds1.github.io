@@ -190,6 +190,8 @@ test("provides user-controlled motion and closes final accessibility review gaps
   assert.match(provider, /useMotionPreference/);
   assert.match(toggle, /Pause animations/);
   assert.match(toggle, /Resume animations/);
+  assert.match(toggle, /aria-label="Animations"/);
+  assert.match(toggle, /aria-pressed=\{motionPaused\}/);
   assert.match(nav, /<MotionToggle \/>/);
   assert.match(hero, /motionPaused/);
   assert.match(hero, /\bpreload\b/);
