@@ -85,11 +85,11 @@ export default function Contact() {
           />
 
           <p className="relative z-10 font-display text-2xl sm:text-3xl md:text-4xl font-black leading-tight max-w-2xl">
-            Got a{" "}
-            <span className="gradient-text">hard ML problem</span>, an
-            interesting role, or just want to talk agentic systems and
+            Have an{" "}
+            <span className="gradient-text">AI idea or ML challenge</span>,
+            an interesting role, or want to talk agentic systems and
             biomedical signals?{" "}
-            <span style={{ color: "#7885a0" }}>My inbox is wide open.</span>
+            <span style={{ color: "#7885a0" }}>Let&apos;s build something meaningful.</span>
           </p>
 
           <div className="relative z-10 mt-10 grid gap-3 sm:grid-cols-3">
