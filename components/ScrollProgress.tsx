@@ -22,10 +22,13 @@ export default function ScrollProgress() {
   }, []);
 
   return (
-    <div aria-hidden className="scroll-progress">
+    <div
+      aria-hidden
+      className="scroll-progress"
+    >
       <div
         className="scroll-progress-meter"
-        style={{ transform: `scaleX(${progress / 100})` }}
+        style={{ width: `${progress}%` }}
       />
     </div>
   );

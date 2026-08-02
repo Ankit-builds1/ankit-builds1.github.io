@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { educationHistory } from "@/lib/data";
 import SectionHeading from "./SectionHeading";
 
@@ -8,40 +5,14 @@ export default function Education() {
   return (
     <section id="education" className="border-b border-border">
       <div className="section-wrap">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-        >
-          <SectionHeading number="03" title="Education" />
-        </motion.div>
+        <SectionHeading number="03" title="Education" />
 
         <div className="mt-12 border-t border-border-strong">
-          {educationHistory.map((education, index) => (
-            <motion.article
+          {educationHistory.map((education) => (
+            <article
               key={education.school}
-              className="studio-surface grid gap-5 !rounded-none !border-x-0 !border-t-0 px-4 py-7 md:grid-cols-[11rem_minmax(0,1fr)] md:items-start md:gap-10 md:px-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{
-                duration: 0.5,
-                delay: index * 0.09,
-                ease: "easeOut",
-              }}
+              className="grid gap-5 border-b border-border py-7 md:grid-cols-[minmax(0,1fr)_12rem] md:items-start md:gap-10"
             >
-              <div className="md:pt-1">
-                <p className="font-mono text-xs uppercase tracking-[0.08em] text-fg-muted">
-                  {education.period}
-                </p>
-                {education.grade ? (
-                  <p className="mt-3 font-mono text-xs uppercase tracking-[0.08em] text-blue">
-                    Result · {education.grade}
-                  </p>
-                ) : null}
-              </div>
-
               <div>
                 <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.015em] text-fg sm:text-2xl">
                   {education.degree}
@@ -50,13 +21,24 @@ export default function Education() {
                   {education.school}
                   {education.board ? (
                     <>
-                      <span className="text-fg-muted"> · </span>
+                      <span className="text-fg-subtle"> · </span>
                       <span>{education.board}</span>
                     </>
                   ) : null}
                 </p>
               </div>
-            </motion.article>
+
+              <div className="md:text-right">
+                <p className="font-mono text-xs uppercase tracking-[0.08em] text-fg-subtle">
+                  {education.period}
+                </p>
+                {education.grade ? (
+                  <p className="mt-2 font-display text-2xl font-semibold text-accent">
+                    {education.grade}
+                  </p>
+                ) : null}
+              </div>
+            </article>
           ))}
         </div>
       </div>

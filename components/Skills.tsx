@@ -1,78 +1,52 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { skills } from "@/lib/data";
 import SectionHeading from "./SectionHeading";
 
-const allSkills = skills.flatMap((skillGroup) =>
-  skillGroup.items.map((item) => ({ group: skillGroup.group, item })),
-);
-const midpoint = Math.ceil(allSkills.length / 2);
-const skillRows = [allSkills.slice(0, midpoint), allSkills.slice(midpoint)];
-
-type SkillItem = (typeof allSkills)[number];
-
-function SkillSequence({
-  items,
-  duplicate = false,
-}: {
-  items: SkillItem[];
-  duplicate?: boolean;
-}) {
-  return (
-    <ul
-      className={`skills-sequence${duplicate ? " skills-sequence-duplicate" : ""}`}
-      aria-hidden={duplicate ? true : undefined}
-    >
-      {items.map((skill) => (
-        <li className="skill-chip" key={`${skill.group}-${skill.item}`}>
-          <span className="skill-chip-group">{skill.group}</span>
-          <span className="skill-chip-name">{skill.item}</span>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-function TickerRow({ items, reverse = false }: { items: SkillItem[]; reverse?: boolean }) {
-  return (
-    <div className="skills-ticker">
-      <div
-        className={reverse ? "skills-marquee-right" : "skills-marquee-left"}
-        onMouseEnter={(event) => {
-          event.currentTarget.style.animationPlayState = "paused";
-        }}
-        onMouseLeave={(event) => {
-          event.currentTarget.style.animationPlayState = "running";
-        }}
-      >
-        <SkillSequence items={items} />
-        <SkillSequence items={items} duplicate />
-      </div>
-    </div>
-  );
-}
+const groupLayouts = [
+  "lg:col-span-4",
+  "lg:col-span-8",
+  "lg:col-span-7",
+  "lg:col-span-5",
+  "lg:col-span-5",
+  "lg:col-span-7",
+] as const;
 
 export default function Skills() {
   return (
-    <section id="skills" className="overflow-hidden border-b border-border">
+    <section id="skills" className="border-b border-border">
       <div className="section-wrap">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          <SectionHeading
-            number="05"
-            title="Stack"
-            note="The tools I use to take models from raw data to working systems."
-          />
-        </motion.div>
+        <SectionHeading
+          number="05"
+          title="Stack"
+          note="The tools I use to take models from raw data to working systems."
+        />
 
-        <div className="mt-12 space-y-3" aria-label="Technical skills">
-          <TickerRow items={skillRows[0]} />
-          <TickerRow items={skillRows[1]} reverse />
+        <div className="skills-grid mt-12">
+          {skills.map((skillGroup, index) => (
+            <article
+              key={skillGroup.group}
+              className={`${groupLayouts[index]} border-b border-r border-border bg-bg p-5 sm:p-7`}
+            >
+              <header className="flex items-baseline gap-3 border-b border-border pb-4">
+                <span className="font-mono text-[10px] tracking-[0.1em] text-accent">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 className="font-display text-xl font-semibold leading-tight text-fg sm:text-2xl">
+                  {skillGroup.group}
+                </h3>
+              </header>
+
+              <ul className="mt-4 grid gap-x-6 sm:grid-cols-2">
+                {skillGroup.items.map((item) => (
+                  <li
+                    key={item}
+                    className="border-b border-border py-2.5 text-sm leading-5 text-fg-muted last:border-b-0"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
         </div>
       </div>
     </section>

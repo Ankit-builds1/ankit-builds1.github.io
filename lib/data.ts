@@ -135,20 +135,21 @@ export const educationHistory: EducationEntry[] = [
     degree: "B.Tech, Computer Science (Data Analytics & ML)",
     school: "Centurion University (CUTM), Bhubaneswar",
     period: "Jul 2024 – Present",
+    grade: "CGPA 8.58",
   },
   {
     degree: "Diploma in Computer Science Engineering",
     school: "Dhabaleswar Institute of Polytechnic, Cuttack",
     board: "SCTE&VT Odisha",
     period: "2024",
-    grade: "79%",
+    grade: "72%",
   },
   {
     degree: "Class X",
     school: "Biswanath Bidya Pitha, Athagarh",
     board: "BSE Odisha",
     period: "2021",
-    grade: "72%",
+    grade: "70%",
   },
 ];
 
