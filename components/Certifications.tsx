@@ -36,13 +36,13 @@ export default function Certifications() {
                   <p className="mt-1 text-sm text-fg-muted">
                     {certification.issuer}
                     {certification.credentialId ? (
-                      <span className="font-mono text-[11px] text-fg-muted">
+                      <span className="font-mono text-[11px] text-fg-subtle">
                         {" "}· ID: {certification.credentialId}
                       </span>
                     ) : null}
                   </p>
                 </div>
-                <p className="font-mono text-xs uppercase tracking-[0.08em] text-fg-muted sm:text-right">
+                <p className="font-mono text-xs uppercase tracking-[0.08em] text-fg-subtle sm:text-right">
                   {certification.date}
                 </p>
               </article>

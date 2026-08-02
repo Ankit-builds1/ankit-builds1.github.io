@@ -3,7 +3,6 @@
 import { FileText, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { navLinks, profile } from "@/lib/data";
-import MotionToggle from "./MotionToggle";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
@@ -39,9 +38,9 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-200 ${
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color] duration-200 ${
         scrolled
-          ? "border-border bg-bg/90 shadow-[0_12px_36px_rgba(0,0,0,0.16)] backdrop-blur-xl"
+          ? "border-border bg-bg/95"
           : "border-transparent bg-transparent"
       }`}
     >
@@ -74,7 +73,7 @@ export default function Navbar() {
                       : "border-transparent text-fg-muted hover:border-border-strong hover:text-fg"
                   }`}
                 >
-                  <span className="font-mono font-normal text-fg-muted">
+                  <span className="font-mono font-normal text-fg-subtle">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   {link.label}
@@ -94,7 +93,6 @@ export default function Navbar() {
             <FileText size={13} aria-hidden />
             Resume
           </a>
-          <MotionToggle />
           <ThemeToggle />
           <button
             type="button"
@@ -112,7 +110,7 @@ export default function Navbar() {
       {open ? (
         <div
           id="mobile-navigation"
-          className="border-t border-border bg-bg/95 backdrop-blur-xl lg:hidden"
+          className="border-t border-border bg-bg lg:hidden"
         >
           <ul className="mx-auto grid max-w-6xl grid-cols-2 px-6 py-3 sm:grid-cols-3">
             {navLinks.map((link, index) => (
@@ -122,7 +120,7 @@ export default function Navbar() {
                   onClick={() => setOpen(false)}
                   className="flex items-baseline gap-1.5 border-b border-border py-3 text-xs font-semibold uppercase tracking-[0.08em] no-underline text-fg-muted transition-colors hover:text-accent"
                 >
-                  <span className="font-mono font-normal text-fg-muted">
+                  <span className="font-mono font-normal text-fg-subtle">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   {link.label}
