@@ -82,6 +82,14 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
+    role: "Generative AI Engineer",
+    org: "Infotact Solutions",
+    period: "Aug 2026 – Present",
+    status: "current",
+    description:
+      "Selected as an Associate L1 - Generative AI intern at Infotact Solutions, working on real-world Generative AI applications.",
+  },
+  {
     role: "AI/ML Intern",
     org: "Labmentix",
     period: "Jul 2026 – Present",
@@ -91,7 +99,7 @@ export const experience: Experience[] = [
   {
     role: "Agentic AI Engineer Intern",
     org: "ApexDevs",
-    period: "Jun 2026 – Jul 2026",
+    period: "May 2026 – Jul 2026",
     status: "completed",
     description:
       "Worked on real-world agentic AI projects and guided tasks in the Agentic AI Engineer domain, with daily updates and weekly milestone reports.",
@@ -100,7 +108,7 @@ export const experience: Experience[] = [
     role: "Data Science Intern",
     org: "The Developers Arena",
     period: "May 2026 – Aug 2026",
-    status: "current",
+    status: "completed",
     description:
       "Completing self-paced data science modules with real-world project development, weekly task submissions, and a structured curriculum with automated progress tracking.",
   },

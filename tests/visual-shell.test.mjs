@@ -17,7 +17,8 @@ test("uses the approved experience timeline", () => {
   assert.match(data, /org: "Labmentix"/);
   assert.match(data, /period: "Jul 2026 – Present"/);
   assert.match(data, /status: "current"/);
-  assert.match(data, /org: "ApexDevs"[\s\S]*?period: "Jun 2026 – Jul 2026"[\s\S]*?status: "completed"/);
+  assert.match(data, /org: "Infotact Solutions"[\s\S]*?period: "Aug 2026 – Present"[\s\S]*?status: "current"/);
+  assert.match(data, /org: "ApexDevs"[\s\S]*?period: "May 2026 – Jul 2026"[\s\S]*?status: "completed"/);
   assert.doesNotMatch(data, /current\?: boolean/);
 });
 
