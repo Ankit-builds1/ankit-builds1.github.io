@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, ExternalLink } from "lucide-react";
 import type { MouseEvent } from "react";
 import { projects, type Project } from "@/lib/data";
 
@@ -86,7 +85,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               href={project.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="grid h-9 w-9 shrink-0 place-items-center rounded-full transition-all duration-200"
+              className="inline-flex h-9 shrink-0 items-center justify-center rounded-full px-3 font-mono text-[11px] uppercase tracking-wide transition-all duration-200"
               style={{
                 border: "1px solid rgba(255,255,255,0.1)",
                 color: "#7885a0",
@@ -103,9 +102,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 el.style.color = "#7885a0";
                 el.style.boxShadow = "none";
               }}
-              aria-label={`Open ${project.title}`}
+              aria-label={`Open GitHub repository for ${project.title}`}
             >
-              <ArrowUpRight size={16} />
+              GitHub
             </a>
           )}
           {project.demoHref && (
@@ -113,12 +112,12 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               href={project.demoHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="grid h-9 w-9 shrink-0 place-items-center rounded-full transition-all duration-200"
+              className="inline-flex h-9 shrink-0 items-center justify-center rounded-full px-3 font-mono text-[11px] uppercase tracking-wide transition-all duration-200"
               style={{ border: "1px solid rgba(255,255,255,0.1)", color: "#7885a0" }}
               aria-label={`Open live demo for ${project.title}`}
               title="Live demo"
             >
-              <ExternalLink size={15} />
+              Demo
             </a>
           )}
           </div>
