@@ -28,7 +28,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     title: "Sleep Stage Detection & Clinical Report Generation",
-    emoji: "🧠",
+    emoji: "💤",
     blurb:
       "Two-level TCN for held-out-subject sleep-stage classification, with 88.29% train accuracy and 87.02% validation accuracy at the best checkpoint.",
     details:
@@ -39,7 +39,7 @@ export const projects: Project[] = [
   },
   {
     title: "Hierarchical Agentic Malware Classification",
-    emoji: "🛡️",
+    emoji: "🦠",
     blurb:
       "Hierarchical malware classification using engineered image features, Random Forest, XGBoost, and confidence-aware ensemble decisions.",
     details:
@@ -50,7 +50,7 @@ export const projects: Project[] = [
   },
   {
     title: "CyberWatch AI",
-    emoji: "CW",
+    emoji: "🛡️",
     blurb:
       "Local, terminal-first cybersecurity toolkit for phishing URLs, harmful text, network flows, malware families, and zero-day anomalies.",
     details:
@@ -60,7 +60,7 @@ export const projects: Project[] = [
   },
   {
     title: "ShadowGuard AI",
-    emoji: "SG",
+    emoji: "🔐",
     blurb:
       "Local AI privacy firewall that scans prompts, repositories, folders, and Git changes for secrets, PII, and prompt injection.",
     details:

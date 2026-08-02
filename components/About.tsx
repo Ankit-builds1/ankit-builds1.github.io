@@ -12,7 +12,7 @@ const fadeUp = {
 
 const stats = [
   { value: "87%", label: "EEG accuracy", sub: "Sleep-stage TCN", color: "#00ff9f", glow: "rgba(0,255,159,0.3)" },
-  { value: "99.9%", label: "Malware precision", sub: "25 family classifier", color: "#ff1a6b", glow: "rgba(255,26,107,0.3)" },
+  { value: "91%", label: "Malware accuracy", sub: "Confidence thresholding", color: "#ff1a6b", glow: "rgba(255,26,107,0.3)" },
   { value: "5", label: "Internships", sub: "Infotact · Labmentix · ApexDevs · TDA · EdiGlobe", color: "#00d0ff", glow: "rgba(0,208,255,0.3)" },
   { value: "10+", label: "Certifications", sub: "Oracle · Stanford · Google", color: "#ffcc00", glow: "rgba(255,204,0,0.3)" },
 ];
