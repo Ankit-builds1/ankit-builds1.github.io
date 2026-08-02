@@ -30,9 +30,9 @@ export const projects: Project[] = [
     title: "Sleep Stage Detection & Clinical Report Generation",
     emoji: "🧠",
     blurb:
-      "Multimodal sleep-stage detection from EEG and EOG signals, paired with automated clinical report generation.",
+      "Two-level TCN for held-out-subject sleep-stage classification, with 88.29% train accuracy and 87.02% validation accuracy at the best checkpoint.",
     details:
-      "Trained a Temporal Convolutional Network on the SHHS1 dataset and cross-validated on unseen SHHS2 data. Fixed a critical resampling bug that lifted accuracy from 47% → 87%. Integrated Mistral 7B (4-bit NF4) to auto-generate 3-paragraph clinical sleep reports from model predictions.",
+      "Trained on SHHS1 (100 subjects, 98,985 epochs) and validated on held-out SHHS2 subjects (52 subjects, 66,853 epochs) using EEG/EOG signals resampled to 125 Hz and filtered with a 4th-order Butterworth bandpass (0.5–45 Hz). The two-level TCN uses segment and epoch encoders with dilations 1/2/4; inverse-frequency class weights and WeightedRandomSampler address class imbalance. The best checkpoint reached 88.29% train accuracy and 87.02% validation accuracy; the official held-out classification report rounds to 87% accuracy, with REM recall of 0.82. Mistral-7B-Instruct-v0.2 runs in 4-bit NF4 quantization and generates three-paragraph clinical reports from sleep efficiency, TST, WASO, and REM% metrics, alongside a hybrid 0–100 sleep score.",
     tags: ["Python", "PyTorch", "TCN", "MNE", "SciPy", "Mistral 7B", "HuggingFace"],
     href: "https://github.com/Ankit-builds1/sleep-quality-stage-detection",
     demoHref: "https://huggingface.co/spaces/Ankit-builds/deepSleep-AI",
