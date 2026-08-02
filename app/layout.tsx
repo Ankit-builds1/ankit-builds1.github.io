@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { DM_Sans, JetBrains_Mono, Newsreader } from "next/font/google";
+import { DM_Sans, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import AnimatedBackground from "@/components/AnimatedBackground";
+import CustomCursor from "@/components/CustomCursor";
+import MotionProvider from "@/components/MotionProvider";
 import ScrollProgress from "@/components/ScrollProgress";
 import "./globals.css";
 
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
+const display = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
   display: "swap",
 });
@@ -56,15 +59,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${newsreader.variable} ${dmSans.variable} ${jetbrainsMono.variable} antialiased`}
+      className={`${display.variable} ${dmSans.variable} ${jetbrainsMono.variable} antialiased`}
       suppressHydrationWarning
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="site-shell min-h-screen overflow-x-hidden">
-        <ScrollProgress />
-        {children}
+        <MotionProvider>
+          <ScrollProgress />
+          <AnimatedBackground />
+          {children}
+          <CustomCursor />
+        </MotionProvider>
       </body>
     </html>
   );
