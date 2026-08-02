@@ -9,16 +9,16 @@ export default function CustomCursor() {
   const ring = useRef({ x: -200, y: -200 });
 
   useEffect(() => {
-    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let cursorActive = false;
-    let rafId: number | null = null;
+    if (typeof window === "undefined") return;
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+    document.documentElement.classList.add("has-custom-cursor");
+
+    let rafId: number;
 
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
     const tick = () => {
-      if (!cursorActive) return;
-
       ring.current.x = lerp(ring.current.x, mouse.current.x, 0.16);
       ring.current.y = lerp(ring.current.y, mouse.current.y, 0.16);
 
@@ -32,32 +32,31 @@ export default function CustomCursor() {
       rafId = requestAnimationFrame(tick);
     };
 
-    const onMove = (event: MouseEvent) => {
-      mouse.current.x = event.clientX;
-      mouse.current.y = event.clientY;
+    rafId = requestAnimationFrame(tick);
+
+    const onMove = (e: MouseEvent) => {
+      mouse.current.x = e.clientX;
+      mouse.current.y = e.clientY;
 
       if (dotRef.current && dotRef.current.style.opacity === "0") {
         dotRef.current.style.opacity = "1";
-        ring.current.x = event.clientX;
-        ring.current.y = event.clientY;
+        ring.current.x = e.clientX;
+        ring.current.y = e.clientY;
       }
       if (ringRef.current && ringRef.current.style.opacity === "0") {
         ringRef.current.style.opacity = "1";
       }
 
-      const target = event.target as HTMLElement | null;
-      const interactive = Boolean(
-        target?.closest("a,button,[role='button'],input,textarea,select"),
-      );
-
+      const target = e.target as HTMLElement | null;
+      const hover = !!target?.closest("a,button,[role='button'],input,textarea,select");
       if (ringRef.current) {
-        ringRef.current.style.width = interactive ? "46px" : "26px";
-        ringRef.current.style.height = interactive ? "46px" : "26px";
-        ringRef.current.style.opacity = interactive ? "0.85" : "0.6";
+        ringRef.current.style.width  = hover ? "46px" : "26px";
+        ringRef.current.style.height = hover ? "46px" : "26px";
+        ringRef.current.style.opacity = hover ? "0.85" : "0.6";
       }
       if (dotRef.current) {
-        dotRef.current.style.width = interactive ? "3px" : "5px";
-        dotRef.current.style.height = interactive ? "3px" : "5px";
+        dotRef.current.style.width  = hover ? "3px" : "5px";
+        dotRef.current.style.height = hover ? "3px" : "5px";
       }
     };
 
@@ -71,76 +70,44 @@ export default function CustomCursor() {
       if (ringRef.current) ringRef.current.style.opacity = "0.6";
     };
 
-    const startCursor = () => {
-      if (cursorActive) return;
+    document.addEventListener("mousemove", onMove, { passive: true });
+    document.addEventListener("mouseleave", onLeave);
+    document.addEventListener("mouseenter", onEnter);
 
-      cursorActive = true;
-      document.documentElement.classList.add("has-custom-cursor");
-      document.addEventListener("mousemove", onMove, { passive: true });
-      document.addEventListener("mouseleave", onLeave);
-      document.addEventListener("mouseenter", onEnter);
-      rafId = requestAnimationFrame(tick);
-    };
-
-    const stopCursor = () => {
-      cursorActive = false;
-
-      if (rafId !== null) {
-        cancelAnimationFrame(rafId);
-        rafId = null;
-      }
-
+    return () => {
+      cancelAnimationFrame(rafId);
       document.documentElement.classList.remove("has-custom-cursor");
       document.removeEventListener("mousemove", onMove);
       document.removeEventListener("mouseleave", onLeave);
       document.removeEventListener("mouseenter", onEnter);
-
-      if (dotRef.current) dotRef.current.style.opacity = "0";
-      if (ringRef.current) ringRef.current.style.opacity = "0";
-    };
-
-    const syncCursor = () => {
-      if (finePointer.matches && !reducedMotion.matches) {
-        startCursor();
-      } else {
-        stopCursor();
-      }
-    };
-
-    finePointer.addEventListener("change", syncCursor);
-    reducedMotion.addEventListener("change", syncCursor);
-    syncCursor();
-
-    return () => {
-      finePointer.removeEventListener("change", syncCursor);
-      reducedMotion.removeEventListener("change", syncCursor);
-      stopCursor();
     };
   }, []);
 
   return (
     <>
+      {/* Lagging ring — GPU composited */}
       <div
         ref={ringRef}
         className="pointer-events-none fixed left-0 top-0 z-[9999] rounded-full"
         style={{
           width: "26px",
           height: "26px",
-          border: "1px solid rgba(126, 245, 202, 0.68)",
-          boxShadow: "0 0 14px rgba(126, 245, 202, 0.16)",
+          border: "2px solid #00ff9f",
+          boxShadow: "0 0 10px rgba(0,255,159,0.45), 0 0 22px rgba(0,255,159,0.18)",
           opacity: 0,
           transition: "width 0.18s ease, height 0.18s ease, opacity 0.12s ease",
           willChange: "transform",
         }}
       />
+      {/* Instant dot */}
       <div
         ref={dotRef}
         className="pointer-events-none fixed left-0 top-0 z-[9999] rounded-full"
         style={{
           width: "5px",
           height: "5px",
-          background: "#7EF5CA",
-          boxShadow: "0 0 8px rgba(126, 245, 202, 0.65)",
+          background: "#00ff9f",
+          boxShadow: "0 0 8px rgba(0,255,159,0.95)",
           opacity: 0,
           transition: "width 0.15s ease, height 0.15s ease",
           willChange: "transform",
