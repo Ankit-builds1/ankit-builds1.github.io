@@ -21,6 +21,7 @@ export type Project = {
   details: string;
   tags: string[];
   href?: string;
+  demoHref?: string;
   status?: "ongoing";
 };
 
@@ -29,46 +30,43 @@ export const projects: Project[] = [
     title: "Sleep Stage Detection & Clinical Report Generation",
     emoji: "🧠",
     blurb:
-      "TCN pipeline classifying EEG sleep stages with 87% cross-dataset accuracy — with a critical 125Hz resampling bug fix that rescued accuracy from 47%.",
+      "Multimodal sleep-stage detection from EEG and EOG signals, paired with automated clinical report generation.",
     details:
       "Trained a Temporal Convolutional Network on the SHHS1 dataset and cross-validated on unseen SHHS2 data. Fixed a critical resampling bug that lifted accuracy from 47% → 87%. Integrated Mistral 7B (4-bit NF4) to auto-generate 3-paragraph clinical sleep reports from model predictions.",
-    tags: ["PyTorch", "TCN", "EEG", "Mistral 7B", "HuggingFace", "GenAI"],
-    href: "https://github.com/ankit848-ai/sleep-quality-stage-detection",
+    tags: ["Python", "PyTorch", "TCN", "MNE", "SciPy", "Mistral 7B", "HuggingFace"],
+    href: "https://github.com/Ankit-builds1/sleep-quality-stage-detection",
+    demoHref: "https://huggingface.co/spaces/Ankit-builds/deepSleep-AI",
   },
   {
     title: "Hierarchical Agentic Malware Classification",
     emoji: "🛡️",
     blurb:
-      "3-stage agentic pipeline (RF + XGBoost → Decision Engine → ResNet-18 CNN) classifying 25 malware families with confidence-aware escalation.",
+      "Hierarchical malware classification using engineered image features, Random Forest, XGBoost, and confidence-aware ensemble decisions.",
     details:
       "Stage-1 RF + XGBoost classifiers handle high-confidence cases; a meta-model decides escalation on a leak-free split; Stage-2 ResNet-18 CNN handles ambiguous inputs. 5-fold stratified cross-validation across all stages. Deployed behind a FastAPI inference endpoint.",
-    tags: [
-      "PyTorch",
-      "ResNet-18",
-      "XGBoost",
-      "RandomForest",
-      "FastAPI",
-      "Cybersecurity",
-    ],
-    href: "https://github.com/ankit848-ai/hierarchical-agentic-malware-classification",
+    tags: ["Python", "Scikit-learn", "XGBoost", "Random Forest", "NumPy", "Pandas", "Matplotlib"],
+    href: "https://github.com/Ankit-builds1/hierarchical-agentic-malware-classification",
+    demoHref: "https://huggingface.co/spaces/AnkitsProject12/malware-classifier",
   },
   {
     title: "CyberWatch AI",
     emoji: "CW",
     blurb:
-      "Local-first AI cybersecurity suite for detecting network intrusions, phishing URLs, malware families, harmful text, and zero-day anomalies without sending prediction data to the cloud.",
+      "Local, terminal-first cybersecurity toolkit for phishing URLs, harmful text, network flows, malware families, and zero-day anomalies.",
     details:
-      "Combines XGBoost, LSTM, RF/XGBoost, 1D-CNN, BERT, Isolation Forest, and Autoencoder models with a CLI, Streamlit dashboard, FastAPI endpoints, and optional live packet monitoring through Scapy/Npcap.",
-    tags: ["Python", "XGBoost", "PyTorch", "Transformers", "FastAPI", "Streamlit", "Cybersecurity"],
+      "Runs six local inference pipelines through a Docker CLI, with XGBoost, LSTM, Random Forest, 1D-CNN, BERT, Isolation Forest, and Autoencoder models. Includes optional Windows live monitoring through Scapy and Npcap.",
+    tags: ["Python", "Docker", "XGBoost", "LSTM", "BERT", "Scapy", "Npcap", "Cybersecurity"],
+    href: "https://github.com/Ankit-builds1/Cyberwatch_ai",
   },
   {
     title: "ShadowGuard AI",
     emoji: "SG",
     blurb:
-      "Local-first AI safety workspace that inspects prompts and public GitHub repositories for secrets, PII, and prompt injection, then returns policy-guided allow, warn, or block decisions.",
+      "Local AI privacy firewall that scans prompts, repositories, folders, and Git changes for secrets, PII, and prompt injection.",
     details:
-      "Built with a Next.js frontend, FastAPI backend, SQLite persistence, and Chrome MV3 extension, with safe rewriting, repository scanning, privacy-risk tracking, and PDF audit reports.",
-    tags: ["Next.js", "TypeScript", "FastAPI", "SQLite", "Chrome MV3", "Scikit-learn", "Cybersecurity"],
+      "Includes a Docker-first CLI, FastAPI local API, Next.js dashboard, SQLite history, Live Guard, Git pre-commit and pre-push hooks, public repository monitoring, PDF reports, and a Chrome Manifest V3 extension.",
+    tags: ["Docker", "Next.js", "FastAPI", "SQLite", "Chrome MV3", "Python", "Cybersecurity"],
+    href: "https://github.com/Ankit-builds1/shadowai-guardian",
   },
 ];
 
