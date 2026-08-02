@@ -2,63 +2,54 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight, Mail } from "lucide-react";
+import type { MouseEvent } from "react";
 import { profile } from "@/lib/data";
 import { GitHubIcon, LinkedInIcon } from "./BrandIcons";
+import SectionHeading from "./SectionHeading";
 
 const socials = [
   {
     label: "Email",
     icon: Mail,
     href: `https://mail.google.com/mail/?view=cm&fs=1&to=${profile.email}&su=${encodeURIComponent(
-      "Hi Ankit — let's talk"
+      "Hi Ankit — let's talk",
     )}`,
-    sub: profile.email,
-    color: "#00ff9f",
+    value: profile.email,
+    tone: "mint",
   },
   {
     label: "GitHub",
     icon: GitHubIcon,
     href: profile.github,
-    sub: "@Ankit-builds1",
-    color: "#ff1a6b",
+    value: "@Ankit-builds1",
+    tone: "blue",
   },
   {
     label: "LinkedIn",
     icon: LinkedInIcon,
     href: profile.linkedin,
-    sub: "ankitdash-edu",
-    color: "#00d0ff",
+    value: "ankitdash-edu",
+    tone: "mint",
   },
-];
+] as const;
+
+const updateSpotlight = (event: MouseEvent<HTMLElement>) => {
+  const rect = event.currentTarget.getBoundingClientRect();
+  event.currentTarget.style.setProperty("--mx", `${event.clientX - rect.left}px`);
+  event.currentTarget.style.setProperty("--my", `${event.clientY - rect.top}px`);
+};
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative px-6 py-28 overflow-hidden">
-      {/* Watermark */}
-      <div
-        className="pointer-events-none absolute -top-8 -left-6 font-display font-black leading-none select-none"
-        style={{ fontSize: "clamp(4.5rem,18vw,16rem)", color: "rgba(0,255,159,0.022)" }}
-        aria-hidden
-      >
-        06
-      </div>
-
-      <div className="mx-auto max-w-6xl relative">
+    <section id="contact" className="border-b border-border">
+      <div className="section-wrap">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-10 flex items-center gap-4"
         >
-          <span className="font-mono text-sm" style={{ color: "#414d63" }}>06 —</span>
-          <h2 className="font-display text-3xl sm:text-4xl font-black tracking-tight">
-            Get in touch
-          </h2>
-          <div
-            className="flex-1 h-px ml-2"
-            style={{ background: "linear-gradient(to right, rgba(0,255,159,0.35), transparent)" }}
-          />
+          <SectionHeading number="06" title="Get in touch" />
         </motion.div>
 
         <motion.div
@@ -66,81 +57,48 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="relative overflow-hidden rounded-3xl p-8 sm:p-12 backdrop-blur-sm"
-          style={{
-            border: "1px solid rgba(0,255,159,0.1)",
-            background: "rgba(0,255,159,0.025)",
-          }}
+          className="contact-panel spotlight studio-surface mt-12"
+          onMouseMove={updateSpotlight}
         >
-          {/* Background glow */}
-          <div
-            className="pointer-events-none absolute -top-40 -right-40 h-96 w-96 rounded-full blur-3xl opacity-20"
-            style={{ background: "radial-gradient(circle, #00ff9f, transparent 65%)" }}
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute -bottom-40 -left-40 h-96 w-96 rounded-full blur-3xl opacity-12"
-            style={{ background: "radial-gradient(circle, #ff1a6b, transparent 65%)" }}
-            aria-hidden
-          />
-
-          <p className="relative z-10 font-display text-2xl sm:text-3xl md:text-4xl font-black leading-tight max-w-2xl">
-            Got a{" "}
-            <span className="gradient-text">hard ML problem</span>, an
+          <p className="max-w-4xl font-display text-[clamp(2.2rem,5.8vw,5.4rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-fg">
+            Got a <span className="text-mint">hard ML problem</span>, an
             interesting role, or just want to talk agentic systems and
             biomedical signals?{" "}
-            <span style={{ color: "#7885a0" }}>My inbox is wide open.</span>
+            <span className="text-fg-muted">My inbox is wide open.</span>
           </p>
 
-          <div className="relative z-10 mt-10 grid gap-3 sm:grid-cols-3">
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target={s.href.startsWith("http") ? "_blank" : undefined}
-                rel="noopener noreferrer"
-                className="group flex items-center justify-between rounded-xl px-4 py-3.5 transition-all duration-200"
-                style={{
-                  border: "1px solid rgba(255,255,255,0.07)",
-                  background: "rgba(255,255,255,0.025)",
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.borderColor = `${s.color}35`;
-                  el.style.background = `${s.color}06`;
-                  el.style.boxShadow = `0 0 24px ${s.color}20`;
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.borderColor = "rgba(255,255,255,0.07)";
-                  el.style.background = "rgba(255,255,255,0.025)";
-                  el.style.boxShadow = "none";
-                }}
-              >
-                <div className="flex items-center gap-3">
-                  <span
-                    className="grid h-9 w-9 place-items-center rounded-lg transition-all duration-200"
-                    style={{
-                      border: "1px solid rgba(255,255,255,0.08)",
-                      background: "rgba(255,255,255,0.04)",
-                      color: "#7885a0",
-                    }}
-                  >
-                    <s.icon size={16} />
+          <div className="mt-10 grid gap-3 lg:grid-cols-3">
+            {socials.map((social) => {
+              const Icon = social.icon;
+
+              return (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`contact-link contact-link-${social.tone} spotlight group`}
+                  onMouseMove={updateSpotlight}
+                >
+                  <span className="contact-link-icon">
+                    <Icon size={17} aria-hidden />
                   </span>
-                  <div className="min-w-0">
-                    <p className="font-mono text-[10px] uppercase tracking-widest" style={{ color: "#414d63" }}>
-                      {s.label}
-                    </p>
-                    <p className="truncate text-sm font-semibold text-fg">{s.sub}</p>
-                  </div>
-                </div>
-                <ArrowUpRight
-                  size={15}
-                  className="shrink-0 text-fg-subtle transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                />
-              </a>
-            ))}
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-mono text-[10px] uppercase tracking-[0.12em] text-fg-muted">
+                      {social.label}
+                    </span>
+                    <span className="mt-1 block break-all text-sm font-semibold text-fg sm:break-normal">
+                      {social.value}
+                    </span>
+                  </span>
+                  <ArrowUpRight
+                    size={16}
+                    className="contact-link-arrow shrink-0 text-fg-muted"
+                    aria-hidden
+                  />
+                </a>
+              );
+            })}
           </div>
         </motion.div>
       </div>
