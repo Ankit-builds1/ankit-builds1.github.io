@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { DM_Sans, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { Exo_2, DM_Sans, JetBrains_Mono } from "next/font/google";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import CustomCursor from "@/components/CustomCursor";
-import MotionProvider from "@/components/MotionProvider";
 import ScrollProgress from "@/components/ScrollProgress";
 import "./globals.css";
 
-const display = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const exo2 = Exo_2({
+  variable: "--font-exo2",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
 
@@ -59,19 +59,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${display.variable} ${dmSans.variable} ${jetbrainsMono.variable} antialiased`}
+      className={`${exo2.variable} ${dmSans.variable} ${jetbrainsMono.variable} antialiased`}
       suppressHydrationWarning
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className="site-shell min-h-screen overflow-x-hidden">
-        <MotionProvider>
-          <ScrollProgress />
-          <AnimatedBackground />
-          {children}
-          <CustomCursor />
-        </MotionProvider>
+      <body className="noise min-h-screen overflow-x-hidden">
+        <ScrollProgress />
+        <AnimatedBackground />
+        {children}
+        <CustomCursor />
       </body>
     </html>
   );
