@@ -28,3 +28,48 @@ test("uses the approved four projects in order", () => {
   ]);
   assert.doesNotMatch(data, /SpeakSense|CMFD/);
 });
+
+test("uses the refined tech studio motion shell", () => {
+  const layout = read("app/layout.tsx");
+  const styles = read("app/globals.css");
+  const pkg = read("package.json");
+  assert.match(layout, /Space_Grotesk/);
+  assert.match(layout, /MotionProvider/);
+  assert.match(layout, /AnimatedBackground/);
+  assert.match(layout, /CustomCursor/);
+  assert.doesNotMatch(layout, /Newsreader/);
+  assert.match(pkg, /"framer-motion"/);
+  assert.match(styles, /--canvas: #0b1112/i);
+  assert.match(styles, /--mint: #7ef5ca/i);
+  assert.match(styles, /--blue: #7eb2ff/i);
+  assert.match(styles, /@keyframes orbit-one/);
+  assert.match(styles, /@keyframes spin-slow/);
+  assert.match(styles, /@keyframes marquee-left/);
+  assert.match(styles, /prefers-reduced-motion/);
+});
+
+test("reacts to custom cursor capability changes after hydration", () => {
+  const cursor = read("components/CustomCursor.tsx");
+  assert.match(cursor, /finePointer\.addEventListener\("change", syncCursor\)/);
+  assert.match(cursor, /reducedMotion\.addEventListener\("change", syncCursor\)/);
+  assert.match(cursor, /finePointer\.removeEventListener\("change", syncCursor\)/);
+  assert.match(cursor, /reducedMotion\.removeEventListener\("change", syncCursor\)/);
+});
+
+test("renders explicit experience statuses with current-only motion", () => {
+  const source = read("components/Experience.tsx");
+  assert.match(source, /^"use client";/);
+  assert.match(source, /item\.status === "current"/);
+  assert.match(source, /item\.status === "completed"/);
+  assert.match(source, /Current/);
+  assert.match(source, /Completed/);
+  assert.match(source, /whileInView/);
+  assert.doesNotMatch(source, /item\.current/);
+});
+
+test("restores education reveal motion", () => {
+  const source = read("components/Education.tsx");
+  assert.match(source, /^"use client";/);
+  assert.match(source, /whileInView/);
+  assert.match(source, /viewport=\{\{ once: true/);
+});
