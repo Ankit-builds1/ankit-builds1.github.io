@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
 import type { MouseEvent } from "react";
 import { projects, type Project } from "@/lib/data";
 
@@ -80,6 +80,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               )}
             </div>
           </div>
+          <div className="flex shrink-0 items-center gap-2">
           {project.href && (
             <a
               href={project.href}
@@ -107,6 +108,20 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               <ArrowUpRight size={16} />
             </a>
           )}
+          {project.demoHref && (
+            <a
+              href={project.demoHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="grid h-9 w-9 shrink-0 place-items-center rounded-full transition-all duration-200"
+              style={{ border: "1px solid rgba(255,255,255,0.1)", color: "#7885a0" }}
+              aria-label={`Open live demo for ${project.title}`}
+              title="Live demo"
+            >
+              <ExternalLink size={15} />
+            </a>
+          )}
+          </div>
         </div>
 
         <p className="relative z-10 mt-4 text-base font-semibold text-fg leading-snug">
@@ -160,7 +175,7 @@ export default function Projects() {
           <div className="flex items-center gap-4 flex-1">
             <span className="font-mono text-sm" style={{ color: "#414d63" }}>04 —</span>
             <h2 className="font-display text-3xl sm:text-4xl font-black tracking-tight">
-              Selected Projects
+              Projects
             </h2>
             <div
               className="flex-1 h-px ml-2"
